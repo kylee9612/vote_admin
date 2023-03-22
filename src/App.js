@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import Login from "./components/js/login";
+import Main from "./components/js/Main"
+import {useEffect, useState} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [isLogin, setLogin] = useState(false)
+
+    useEffect(() => {
+        let user = sessionStorage.getItem("userId")
+        if (user == null) {
+            setLogin(false)
+        } else {
+            setLogin(true)
+        }
+    }, [])
+
+    const btnLogin = (()=>{
+        setLogin(true)
+    })
+
+    return (
+        <div id={'wrap'}>
+            {isLogin ?
+                <Main/> :
+                <Login btnLogin={btnLogin}/>
+            }
+        </div>
+    );
 }
 
 export default App;

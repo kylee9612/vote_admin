@@ -1,0 +1,35 @@
+.menu{
+    text-decoration: none;
+    list-style-type: none;
+    position: absolute;
+    left: 0;
+    top : 24vh;
+    min-width: 13vw;
+    border-radius: 1vw;
+    padding: 0 2vw;
+    transition: all 1s;
+}
+
+.menu li{
+    padding : 2vh 1vw;
+    background-color: #f5d9bc;
+    border-radius: 1vw;
+    min-height: 1vh;
+    min-width: 100%;
+    margin : 1vh;
+    border: 2px solid #bfb397;
+    cursor : pointer;
+    transition: all 1s;
+    font-size: 20px;
+    font-weight: bold;
+    color: #6a6a6a;
+}
+
+.menu li:hover{
+    background-color: #d69b74;
+    transition: all 1s;
+}
+
+.left_menu{
+    display: flex;
+}
