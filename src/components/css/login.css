@@ -1,6 +1,6 @@
 .box{
     border: 0;
-    border-radius: 5.5vh;
+    border-radius: 3vh;
     padding: 4vh 4vw;
     background-color: rgb(200 200 230);
     min-width: 15vw;
@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    box-shadow: 7px 7px 20px #e3e36c;
+    box-shadow: 2px 2px 20px #323440;
 }
 
 .center_span{

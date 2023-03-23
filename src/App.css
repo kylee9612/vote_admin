@@ -46,6 +46,7 @@
 html, body {
     height: 100vh;
     font-family: "Noto Sans KR", sans-serif;
+    overflow: hidden;
 }
 
 #wrap {
@@ -63,4 +64,41 @@ input {
 
 input:focus {
     outline: none;
+}
+
+.transition-group{
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-enter{
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.slide-enter-active{
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.slide-exit{
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.slide-exit-active{
+    opacity: 0;
+    transition: 0.5s;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
 }

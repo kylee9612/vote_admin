@@ -1,0 +1,77 @@
+.page{
+    display: flex;
+    position: absolute;
+    max-height: calc(100vh - 110px - 6vh);
+    min-height: calc(100vh - 110px - 6vh);
+    min-width: 83%;
+    max-width: 83%;
+    left: 13vw;
+    right: 0;
+    top: 110px;
+    background-color: #c1c1c1;
+    padding: 3vh 2vw;
+}
+
+.page-content{
+    scroll-behavior: smooth;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-width: 95%;
+    min-height: 100%;
+    background-color: #ffffff;
+    padding : 3vh 2vw;
+    border-radius: 10px;
+}
+
+
+.page-content::-webkit-scrollbar{
+    width: 8px;
+}
+
+.page-content::-webkit-scrollbar-thumb{
+    height: 20%;
+    background: rgb(107, 107, 107);
+    border-radius: 50px;
+}
+
+.page-content::-webkit-scrollbar-track{
+    background: rgba(65, 65, 65, 0.21);
+    border-radius: 10px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form input:focus{
+    border: 2px solid rgba(113,185,199,0.58);
+    transition: 0.7s;
+}
+
+form input{
+    min-width: 15vw;
+    height: 4vh;
+    max-height: 40px;
+    margin: 1vh;
+    border: 2px solid rgba(0,0,0,0.27);
+    transition: 0.7s;
+}
+
+form button{
+    height: 4vh;
+    max-height: 40px;
+    margin: 1vh;
+    border: 2px solid rgba(199,157,132,0.58);
+    min-width: 16vw;
+    background-color: #ffe8e5;
+    transition: all 1s;
+}
+
+form button:hover{
+    border: 2px solid rgba(255, 117, 124, 0.58);
+    background-color: #ffc9bf;
+    transition: all 1s;
+}

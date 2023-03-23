@@ -2,8 +2,17 @@ import './App.css';
 import Login from "./components/js/login";
 import Main from "./components/js/Main"
 import {useEffect, useState} from "react";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
+import Header from "./components/js/Header";
+import AddCoin from "./components/js/main/page/addCoin";
+import AddVote from "./components/js/main/page/addVote";
+import AddNotice from "./components/js/main/page/addNotice";
+import AddAdmin from "./components/js/main/page/addAdmin";
+import VoteResult from "./components/js/main/page/voteResult";
 
 function App() {
+
     const [isLogin, setLogin] = useState(false)
 
     useEffect(() => {
@@ -15,16 +24,34 @@ function App() {
         }
     }, [])
 
-    const btnLogin = (()=>{
-        setLogin(true)
-    })
+    const navigate = useNavigate()
+    const location = useLocation();
+    const btnLogin = () => {
+        navigate("/main")
+    }
+
+    const prop = {
+        navigate: navigate,
+        location: location
+    }
 
     return (
         <div id={'wrap'}>
-            {isLogin ?
-                <Main/> :
-                <Login btnLogin={btnLogin}/>
-            }
+            <TransitionGroup className={"transition-group"}>
+                <Header/>
+                <CSSTransition key={location.pathname} timeout={500} classNames={"slide"}>
+                    <Routes location={location}>
+                        <Route path="/" element={<Login btnLogin={btnLogin}/>}></Route>
+                        <Route path="/main" element={<Main prop={prop}/>}>
+                            <Route path="addVote" element={<AddVote prop={prop}/>}></Route>
+                            <Route path="addCoin" element={<AddCoin prop={prop}/>}></Route>
+                            <Route path="addNotice" element={<AddNotice prop={prop}/>}></Route>
+                            <Route path="addAdmin" element={<AddAdmin prop={prop}/>}></Route>
+                            <Route path="voteResult" element={<VoteResult prop={prop}/>}></Route>
+                        </Route>
+                    </Routes>
+                </CSSTransition>
+            </TransitionGroup>
         </div>
     );
 }

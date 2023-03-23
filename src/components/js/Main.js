@@ -1,10 +1,12 @@
 import "../css/main.css"
-import Menu from "./Menu"
+import Menu from "./main/Menu"
+import Page from "./main/Page";
 
-function Main(){
+function Main(props){
     return(
         <>
-            <Menu/>
+            <Menu prop={props.prop}/>
+            <Page prop={props.prop}/>
         </>
     )
 }
