@@ -1,15 +1,15 @@
-function AddVote(){
-    return(
-        <div>
-            <table>
-                <th>
-                    AddVote
-                </th>
-                <tr>
-                    <td>ADD</td>
-                </tr>
-            </table>
-        </div>
+import Calendar from "./box/Calendar";
+
+function AddVote() {
+
+    return (
+        <>
+            <form>
+                <input type={"text"} placeholder={"제목"}/>
+                <Calendar />
+                <input type={"date"} placeholder={"투표 종료일"}/>
+            </form>
+        </>
     )
 }
 

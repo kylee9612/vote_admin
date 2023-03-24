@@ -7,8 +7,6 @@ function admin() {
         let pageHeight = page.clientHeight
         let ranX = Math.random() * pageWidth
         let ranY = Math.random() * pageHeight
-        console.log(ranX)
-        console.log(ranY)
         let btn = document.getElementById('idiotBtn')
         btn.style.position = 'absolute'
         btn.style.top = ranY+"px"
@@ -17,7 +15,7 @@ function admin() {
 
     const changeTitle = () => {
         let title = document.querySelector(".title")
-        title.textContent = "알고있었습니다 :)"
+        title.textContent = "그럴줄 알았다 :)"
     }
 
     return (

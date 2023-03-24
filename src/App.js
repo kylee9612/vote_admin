@@ -52,7 +52,7 @@ function App() {
                             <Route path="addAdmin" element={<AddAdmin prop={prop}/>}></Route>
                             <Route path="voteResult" element={<VoteResult prop={prop}/>}></Route>
                         </Route>
-                        <Route path={"*"} element={<Error/>}></Route>
+                        <Route path={"*"} element={<Error prop={prop}/>}></Route>
                     </Routes>
                 </CSSTransition>
             </TransitionGroup>
