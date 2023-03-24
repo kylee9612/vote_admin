@@ -1,0 +1,54 @@
+#error-1 {
+    z-index: 0;
+    transition: all 0.25s ease-in;
+}
+
+#error-2 {
+    height: 370px;
+}
+
+#error-3 {
+    width: 940px;
+    height: 370px;
+    clear: both;
+}
+
+#error-4 {
+    z-index: 1;
+    width: 110%;
+    height: 425px;
+    top: -20px;
+    left: -20px;
+    transform: translate3d(0px, 3.78054px, 0px);
+}
+
+#error-5 {
+    z-index: 10;
+    top: 72px;
+    left: 72px;
+    transform: translate3d(8.52864px, -1.89027px, 0px);
+}
+
+#error-6 {
+    z-index: 9; top: 94px; left: 356px; transform: translate3d(4.26432px, -1.89027px, 0px);
+}
+
+#error-7 {
+    z-index: 8; top: 150px; left: 432px; transform: translate3d(4.26432px, -1.89027px, 0px);
+}
+
+#error-8 {
+    z-index: 7; top: 297px; left: 371px; transform: translate3d(4.26432px, -1.89027px, 0px);
+}
+
+#error-9 {
+    z-index: 6; top: 263px; left: 442px; transform: translate3d(4.26432px, -1.89027px, 0px);
+}
+
+#error-10 {
+    z-index: 5; top: 73px; left: 467px; transform: translate3d(-21.3216px, 3.78054px, 0px);
+}
+
+#error-11 {
+    z-index: 4; top: 113px; left: 762px; transform: translate3d(-32.4824px, 5.67081px, 0px);
+}

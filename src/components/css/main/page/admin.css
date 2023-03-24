@@ -1,0 +1,20 @@
+#idiotBtn{
+    /*position : absolute;*/
+}
+
+button{
+    width: 150px;
+    height: 80px;
+    background-color: #ffe4bf;
+    border: 1px solid;
+    cursor: pointer;
+    margin : 20px;
+}
+
+.fun{
+    text-align: center;
+}
+
+.fun h1{
+    font-size: 80px;
+}

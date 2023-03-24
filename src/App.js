@@ -10,6 +10,8 @@ import AddVote from "./components/js/main/page/addVote";
 import AddNotice from "./components/js/main/page/addNotice";
 import AddAdmin from "./components/js/main/page/addAdmin";
 import VoteResult from "./components/js/main/page/voteResult";
+import Error from "./components/js/Error";
+import Admin from "./components/js/main/page/admin";
 
 function App() {
 
@@ -43,12 +45,14 @@ function App() {
                     <Routes location={location}>
                         <Route path="/" element={<Login btnLogin={btnLogin}/>}></Route>
                         <Route path="/main" element={<Main prop={prop}/>}>
+                            <Route path="" element={<Admin prop={prop}/>}></Route>
                             <Route path="addVote" element={<AddVote prop={prop}/>}></Route>
                             <Route path="addCoin" element={<AddCoin prop={prop}/>}></Route>
                             <Route path="addNotice" element={<AddNotice prop={prop}/>}></Route>
                             <Route path="addAdmin" element={<AddAdmin prop={prop}/>}></Route>
                             <Route path="voteResult" element={<VoteResult prop={prop}/>}></Route>
                         </Route>
+                        <Route path={"*"} element={<Error/>}></Route>
                     </Routes>
                 </CSSTransition>
             </TransitionGroup>
