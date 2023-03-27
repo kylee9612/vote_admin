@@ -1,17 +1,17 @@
 import './App.css';
-import Login from "./components/js/login";
-import Main from "./components/js/Main"
+import Login from "./components/js/side/Login";
+import Main from "./components/js/side/Main"
 import {useEffect, useState} from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
-import Header from "./components/js/Header";
-import AddCoin from "./components/js/main/page/addCoin";
-import AddVote from "./components/js/main/page/addVote";
-import AddNotice from "./components/js/main/page/addNotice";
-import AddAdmin from "./components/js/main/page/addAdmin";
-import VoteResult from "./components/js/main/page/voteResult";
-import Error from "./components/js/Error";
-import Admin from "./components/js/main/page/admin";
+import Header from "./components/js/side/Header";
+import AddCoin from "./components/js/main/page/AddCoin";
+import AddVote from "./components/js/main/page/AddVote";
+import AddNotice from "./components/js/main/page/AddNotice";
+import AddAdmin from "./components/js/main/page/AddAdmin";
+import VoteResult from "./components/js/main/page/VoteResult";
+import Error from "./components/js/side/Error";
+import Admin from "./components/js/main/page/Admin";
 
 function App() {
 

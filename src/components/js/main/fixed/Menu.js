@@ -1,4 +1,4 @@
-import "../../css/main/menu.css"
+import "./Menu.css"
 
 function Menu(props) {
     const navigate = props.prop.navigate

@@ -1,4 +1,4 @@
-import "../../css/main/page.css"
+import "./Page.css"
 import {Outlet} from "react-router-dom";
 function Page() {
     return (

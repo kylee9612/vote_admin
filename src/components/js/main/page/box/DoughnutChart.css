@@ -1,0 +1,18 @@
+.chart-container{
+    display: flex;
+    justify-content: center;
+    max-width: 30vw;
+    max-height: 19vw;
+    min-width: 35vw;
+    min-height: 13vw;
+    padding: 5vh 1vw;
+    background-color: rgba(231, 231, 231, 0.78);
+    margin: 0;
+}
+
+.line-chart{
+    max-width: 19vw;
+    max-height: 19vw;
+    min-width: 13vw;
+    min-height: 13vw;
+}

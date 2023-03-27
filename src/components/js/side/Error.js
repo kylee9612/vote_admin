@@ -1,4 +1,4 @@
-import '../css/error.css'
+import './Error.css'
 
 function Error(props) {
     const backToHome = ()=>{

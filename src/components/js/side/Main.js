@@ -1,6 +1,6 @@
-import "../css/main.css"
-import Menu from "./main/Menu"
-import Page from "./main/Page";
+import "./Main.css"
+import Menu from "../main/fixed/Menu"
+import Page from "../main/fixed/Page";
 
 function Main(props){
     return(

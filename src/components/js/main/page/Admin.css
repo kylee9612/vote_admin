@@ -1,0 +1,8 @@
+.main-index{
+    grid-template-columns: repeat(2, minmax(auto, auto));
+    grid-template-rows: repeat(auto-fit, minmax(15%, auto));
+    row-gap: 3vh;
+    column-gap: 0;
+    display: grid;
+    justify-items: center;
+}
