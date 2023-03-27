@@ -15,13 +15,12 @@ const generateColors = (numColors) => {
     return colors;
 }
 
-const chartColors = generateColors(2000);
-
+const chartColors = generateColors(200);
 
 const colorGenerator = () => {
     const availableColors = chartColors.filter(color => !usedColor.has(color));
     if (availableColors.length === 0) {
-        throw new Error('All chart colors have been used.');
+        usedColor = new Set();
     }
     const randomIndex = Math.floor(Math.random() * availableColors.length);
     const randomColor = availableColors[randomIndex];
@@ -33,10 +32,8 @@ class DoughnutChart extends Component {
     chartRef = React.createRef();
 
     componentDidMount() {
-        const { data, id } = this.props;
+        const {data, id} = this.props;
         const myChartRef = this.chartRef.current.getContext("2d");
-
-        let hoverChartElement = null;
 
         if (window[`myLineChart${id}`]) {
             window[`myLineChart${id}`].destroy();
@@ -48,7 +45,7 @@ class DoughnutChart extends Component {
                 datasets: [
                     {
                         label: "투표 수",
-                        data: [86, 67, 91, 85, 76, 86, 79],
+                        data: data,
                         borderColor: "rgba(231, 231, 231, 0.78)",
                         backgroundColor: data.map(() => colorGenerator()),
                         borderWidth: 2,
@@ -83,7 +80,9 @@ class DoughnutChart extends Component {
         return (
             <div className={'chart-container'}>
                 <canvas ref={this.chartRef} className="line-chart"/>
-            </div>);
+                <span className={'chart-title'}>{this.props.id}회차</span>
+            </div>
+        );
     }
 }
 

@@ -1,13 +1,21 @@
 .chart-container{
     display: flex;
-    justify-content: center;
     max-width: 30vw;
-    max-height: 19vw;
+    max-height: 20vw;
     min-width: 35vw;
-    min-height: 13vw;
+    min-height: 15vw;
     padding: 5vh 1vw;
     background-color: rgba(231, 231, 231, 0.78);
+    flex-direction: column;
+    align-items: center;
     margin: 0;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.chart-container:hover{
+    background-color: rgba(201, 201, 201,0.7);
+    transition: 0.5s;
 }
 
 .line-chart{
@@ -15,4 +23,9 @@
     max-height: 19vw;
     min-width: 13vw;
     min-height: 13vw;
+}
+
+.chart-title{
+    font-size: 20px;
+    font-weight: bold;
 }
