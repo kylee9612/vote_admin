@@ -1,0 +1,11 @@
+.admin-form button{
+    height: 4vh;
+    max-height: 40px;
+    min-width: 16vw;
+}
+
+.admin-form input{
+    min-width: 15vw;
+    height: 4vh;
+    max-height: 40px;
+}

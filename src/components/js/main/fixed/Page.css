@@ -10,6 +10,7 @@
     top: 110px;
     background-color: #c1c1c1;
     padding: 3vh 2vw;
+    transition: 1s;
 }
 
 .page-content{
@@ -52,20 +53,14 @@ form input:focus{
 }
 
 form input{
-    min-width: 15vw;
-    height: 4vh;
-    max-height: 40px;
     margin: 1vh;
     border: 2px solid rgba(0,0,0,0.27);
     transition: 0.7s;
 }
 
 form button{
-    height: 4vh;
-    max-height: 40px;
     margin: 1vh;
     border: 2px solid rgba(199,157,132,0.58);
-    min-width: 16vw;
     background-color: #ffe8e5;
     transition: all 1s;
 }

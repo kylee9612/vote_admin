@@ -1,9 +1,16 @@
 import './Header.css'
 
-function Header() {
+function Header({navigate, location}) {
+    const logout = () => {
+        navigate("/")
+    }
+
     return (
         <div className={"header"}>
-            <span className={'logout-logo'}>LOGOUT</span>
+            {location.pathname === "/" ?
+                "" :
+                <span className={'logout-logo'} onClick={logout}>LOGOUT</span>
+            }
         </div>
     )
 }

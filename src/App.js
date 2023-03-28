@@ -40,7 +40,7 @@ function App() {
     return (
         <div id={'wrap'}>
             <TransitionGroup className={"transition-group"}>
-                <Header/>
+                <Header navigate={navigate} location={location}/>
                 <CSSTransition key={location.pathname} timeout={500} classNames={"slide"}>
                     <Routes location={location}>
                         <Route path="/" element={<Login btnLogin={btnLogin}/>}></Route>

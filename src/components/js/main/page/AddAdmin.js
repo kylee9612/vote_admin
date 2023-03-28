@@ -1,3 +1,4 @@
+import "./AddAdmin.css"
 function AddAdmin(props){
     const submitForm = (event)=>{
         event.preventDefault()
@@ -6,7 +7,7 @@ function AddAdmin(props){
     return(
         <>
             <h1>조합원 추가</h1>
-            <form>
+            <form className={"admin-form"}>
                 <input type={"number"} placeholder={"조합 번호"}/>
                 <input type={"text"} placeholder={"성명"}/>
                 <input title={"password"} placeholder={"비밀번호"}/>

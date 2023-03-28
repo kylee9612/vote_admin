@@ -6,4 +6,15 @@
     top: 0;
     left: 0;
     z-index: 1;
+    display: grid;
+}
+
+.logout-logo{
+    position: absolute;
+    right: 3vw;
+    top : 38px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #5b5b5b;
+    cursor: pointer;
 }
