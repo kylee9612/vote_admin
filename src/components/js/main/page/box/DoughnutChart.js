@@ -32,8 +32,17 @@ class DoughnutChart extends Component {
     chartRef = React.createRef();
 
     componentDidMount() {
-        const {data, id} = this.props;
+        const {round, id} = this.props;
         const myChartRef = this.chartRef.current.getContext("2d");
+
+        let data = [];
+        let coin = [];
+
+        round.map(element => {
+                data.push(element.count)
+                coin.push(element.coin_idx)
+            },
+        );
 
         if (window[`myLineChart${id}`]) {
             window[`myLineChart${id}`].destroy();
@@ -41,7 +50,7 @@ class DoughnutChart extends Component {
         window[`myLineChart${id}`] = new Chart(myChartRef, {
             type: "doughnut",
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: coin,
                 datasets: [
                     {
                         label: "투표 수",

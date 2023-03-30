@@ -1,17 +1,33 @@
 import DoughnutChart from "./box/DoughnutChart";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
-function VoteResult(){
-    useEffect(()=>{
+function VoteResult() {
 
-    })
+    const [doughnut, setDoughnut] = useState([]);
 
-    return(
+    useEffect(() => {
+        const chart = [];
+        axios.get("/api/admin/voteResult")
+            .then(response => {
+                Object.keys(response.data).map((element) => {
+                    chart.push(response.data[element])
+                })
+                setDoughnut(chart)
+                console.log(doughnut)
+            })
+            .catch(error => {
+                alert(error)
+            })
+    }, [])
+
+    return (
         <div className={'main-index'}>
-            <DoughnutChart data={[86, 67, 91, 85, 76, 86, 79]} id={1} />
-            <DoughnutChart data={[86, 67, 91, 85, 76, 86, 79]} id={2} />
-            <DoughnutChart data={[86, 67, 91, 85, 76, 86, 79]} id={3} />
-            <DoughnutChart data={[86, 67, 91, 85, 76, 86, 79]} id={4} />
+            {
+                (doughnut).map(element =>
+                    <DoughnutChart round={element} id={element[0].round}/>
+                )
+            }
         </div>
     )
 }
