@@ -1,7 +1,7 @@
 import './App.css';
 import Login from "./components/js/side/Login";
 import Main from "./components/js/side/Main"
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import Header from "./components/js/side/Header";
@@ -12,6 +12,7 @@ import AddAdmin from "./components/js/main/page/AddAdmin";
 import VoteResult from "./components/js/main/page/VoteResult";
 import Error from "./components/js/side/Error";
 import Admin from "./components/js/main/page/Admin";
+import EditNotice from "./components/js/main/page/EditNotice";
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
                             <Route path="addNotice" element={<AddNotice prop={prop}/>}></Route>
                             <Route path="addAdmin" element={<AddAdmin prop={prop}/>}></Route>
                             <Route path="voteResult" element={<VoteResult prop={prop}/>}></Route>
+                            <Route path="addNotice/:id" element={<EditNotice prop={prop}/>}></Route>
                         </Route>
                         <Route path={"*"} element={<Error prop={prop}/>}></Route>
                     </Routes>

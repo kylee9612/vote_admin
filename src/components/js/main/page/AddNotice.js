@@ -7,10 +7,14 @@ import './NoticeList.css';
 import Pagination from "../Util/Pagination";
 import Notice from "./Notice";
 import Search from "../Util/Search";
+import EditNotice from "./EditNotice";
+import {Route, Router, Routes, useLocation, useNavigate, useParams} from "react-router-dom";
+import Login from "../../side/Login";
 
 const AddNotice = (props) => {
    // const notice = NoticeDummyList
-
+   const location = useLocation()
+   const Nav = useNavigate()
    /**search NoticeList List**/
    const [searchText, setSearchText] = useState("");
    const [searchType, setSearchType] = useState(0);
@@ -18,7 +22,6 @@ const AddNotice = (props) => {
    /**pageNation**/
    const [curPage, setCurPage] =useState(1);
    const [lastPage, setLastPage] = useState(1);
-
    /**pageNation**/
 
    let index = 0;
@@ -48,6 +51,15 @@ const AddNotice = (props) => {
    function searchNoticeList(){
 
    }
+
+   function goEditNotice(type, id){
+      console.log(location.pathname)
+      console.log("type ::: "+ type);
+      console.log("id ::: "+ id);
+      const path = location.pathname +"/"+ id
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      Nav(path);
+   }
    /**search NoticeList List**/
 
    return (
@@ -57,7 +69,7 @@ const AddNotice = (props) => {
              <div className="notice_header _header">
                 {/*<div className="notice_header_title"><h2>Notice</h2></div>*/}
                 <div className="notice_header_sub _header_sub">
-                   {/*<p>This page exists for notice.</p>*/}
+                   <button onClick={()=>goEditNotice("insert",0 )}>추가</button>
                    <Search search={searchNoticeList}
                            setSearchText={setSearchText}
                            setSearchType={setSearchType}/>
@@ -89,6 +101,7 @@ const AddNotice = (props) => {
                            notice={element}
                            searchText={searchText}
                            searchType={searchType}
+                           goEditNotice={goEditNotice}
                        />
                    ))}
                 </tbody>
