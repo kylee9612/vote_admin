@@ -58,11 +58,11 @@ html, body {
     background-color: rgb(240 240 240);
 }
 
-input {
+input , textarea, select{
     padding-left: 1vh;
 }
 
-input:focus {
+input:focus , textarea:focus, select:focus{
     outline: none;
 }
 
@@ -101,4 +101,7 @@ input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button{
     -webkit-appearance: none;
     margin: 0;
+}
+textarea{
+    resize: none;
 }

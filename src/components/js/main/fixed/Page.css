@@ -47,15 +47,19 @@ form{
     align-items: center;
 }
 
-form input:focus{
+form input:focus, form textarea:focus, form select:focus{
     border: 2px solid rgba(113,185,199,0.58);
     transition: 0.7s;
 }
 
-form input{
-    margin: 1vh;
+form input, form select, form textarea{
+    margin: 1vh 1vw;
     border: 2px solid rgba(0,0,0,0.27);
     transition: 0.7s;
+}
+
+form textarea{
+    padding: 1vh 1vw;
 }
 
 form button{
@@ -69,4 +73,23 @@ form button:hover{
     border: 2px solid rgba(255, 117, 124, 0.58);
     background-color: #ffc9bf;
     transition: all 1s;
+}
+
+.div-file{
+    padding-left: 1vh;
+    margin: 1vh 1vw;
+    border: 2px solid rgba(0,0,0,0.27);
+    transition: 0.7s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #5b5b5b;
+    font-size: 15px;
+}
+
+.div-file:hover {
+    border: 2px solid rgba(113, 185, 199, 0.58);
+    transition: 0.5s;
+    cursor: pointer;
+    background-color: rgb(236, 249, 255);
 }

@@ -16,14 +16,13 @@ function Admin() {
     const [doughnut, setDoughnut] = useState([]);
 
     useEffect(() => {
-        const chart = [];
         axios.get("/api/admin/voteResult")
             .then(response => {
-                Object.keys(response.data).map((element) => {
-                    chart.push(response.data[element])
-                })
-                setDoughnut(chart)
-                console.log(doughnut)
+                let data = response.data;
+                setDoughnut(
+                    Object.keys(data.data).map((element) => {
+                    return data.data[element]
+                }))
             })
             .catch(error => {
                 alert(error)
