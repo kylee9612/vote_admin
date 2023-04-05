@@ -1,0 +1,65 @@
+.select-panel{
+    background-color: rgba(231, 231, 231, 0.78);
+    min-width: 90%;
+    height: 180px;
+    margin : 1vh 1vw 3vh;
+}
+
+.radio-panel{
+    padding : 2vh 0;
+    text-align: center;
+    display: flex;
+}
+
+.radio-panel label{
+    margin : 0 3vw;
+}
+
+.radio-panel label {
+    display: flex;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.375em;
+}
+
+.radio-panel label input {
+    position: absolute;
+    left: -9999px;
+}
+
+.radio-panel label input:checked + span {
+    background-color: #414181;
+    color: white;
+}
+
+.radio-panel label input:checked + span:before {
+    box-shadow: inset 0 0 0 0.4375em #00005c;
+}
+
+.radio-panel label span {
+    display: flex;
+    align-items: center;
+    padding: 0.375em 0.75em 0.375em 0.375em;
+    border-radius: 99em;
+    transition: 0.25s ease;
+    color: #414181;
+}
+
+.radio-panel label span:hover {
+    background-color: #d6d6e5;
+}
+
+.radio-panel label span:before {
+    display: flex;
+    flex-shrink: 0;
+    content: "";
+    background-color: #fff;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    margin-right: 0.375em;
+    transition: 0.25s ease;
+    box-shadow: inset 0 0 0 0.125em #00005c;
+}

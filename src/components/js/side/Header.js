@@ -1,4 +1,5 @@
 import './Header.css'
+import '../main/fixed/sweetalert.css'
 
 function Header({navigate, location}) {
     const logout = () => {
