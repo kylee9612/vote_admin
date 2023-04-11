@@ -1,7 +1,6 @@
 import "./Menu.css"
 
-function Menu(props) {
-    const navigate = props.prop.navigate
+function Menu({navigate}) {
 
     const navList = ['/main/addVote', '/main/addCoin', '/main/voteResult', '/main/addAdmin', '/main/addNotice']
 

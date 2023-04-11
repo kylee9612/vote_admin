@@ -27,17 +27,24 @@ function AddCoin(prop) {
 
     function handleSubmit(event) {
         event.preventDefault()
-        console.log(fileList)
         let formData = new FormData(event.currentTarget)
-        formData.append("coin_pic[]",fileList)
+
+        //  List 형태로 받기 위해서는 back-end 에 중복된 key 값에 value 를 추가해 주면 된다.
+        fileList.map((pic, index) => {
+            formData.append("coin_pic_list", pic);
+        })
+
         axios.post("/api/admin/addCoin", formData)
             .then(response => {
                 let data = response.data;
-                if (data.code !== "0000") {
-                    Swal.fire({
-                        showConfirmButton: "OK",
-                        html: data.message
-                    })
+                Swal.fire({
+                    showConfirmButton: "OK",
+                    html: data.message
+                })
+                if(data.code == "0000"){
+                    event.target.reset();
+                    setShowImages([])
+                    setFileList([])
                 }
             })
             .catch(error => {
@@ -99,7 +106,8 @@ function AddCoin(prop) {
                                 <span>파일 업로드</span>
                             </div>
                         </label>
-                        <input id={"file"} type={"file"} accept={"image/*"} name={"coin_pic"} multiple placeholder={"이미지 파일"}
+                        <input id={"file"} type={"file"} accept={"image/*"} name={"coin_pic"} multiple
+                               placeholder={"이미지 파일"}
                                onChange={imagesPreview}/>
                     </div>
                 </div>

@@ -40,7 +40,7 @@ class DoughnutChart extends Component {
 
         round.map(element => {
                 data.push(element.count)
-                coin.push(element.coin_idx)
+                coin.push(element.coin_name)
             },
         );
 

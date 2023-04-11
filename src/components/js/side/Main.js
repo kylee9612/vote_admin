@@ -8,10 +8,7 @@ function Main(props) {
     const location = props.prop.location
     return (
         <>
-            <Menu prop={props.prop}/>
-            <CSSTransition key={location.pathname} timeout={500} classNames={"slide"}>
-                <Page prop={props.prop}/>
-            </CSSTransition>
+            <Page prop={props.prop}/>
         </>
     )
 }

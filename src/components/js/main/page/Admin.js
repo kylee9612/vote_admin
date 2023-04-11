@@ -33,7 +33,7 @@ function Admin() {
         <div className={'main-index'}>
             {
                 (doughnut).map(element =>
-                    <DoughnutChart round={element} id={element[0].round}/>
+                    <DoughnutChart key={element[0].round} round={element} id={element[0].round}/>
                 )
             }
         </div>

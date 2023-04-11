@@ -12,6 +12,7 @@ import AddAdmin from "./components/js/main/page/AddAdmin";
 import VoteResult from "./components/js/main/page/VoteResult";
 import Error from "./components/js/side/Error";
 import Admin from "./components/js/main/page/Admin";
+import Menu from "./components/js/main/fixed/Menu";
 
 function App() {
 
@@ -39,8 +40,9 @@ function App() {
 
     return (
         <div id={'wrap'}>
+            <Header navigate={navigate} location={location}/>
+            {location.pathname === "/" ? <></> : <Menu navigate={navigate}/>}
             <TransitionGroup className={"transition-group"}>
-                <Header navigate={navigate} location={location}/>
                 <CSSTransition key={location.pathname} timeout={500} classNames={"slide"}>
                     <Routes location={location}>
                         <Route path="/" element={<Login btnLogin={btnLogin}/>}></Route>

@@ -1,12 +1,23 @@
 .select-panel{
     background-color: rgba(231, 231, 231, 0.78);
     min-width: 90%;
-    height: 180px;
+    height: 150px;
     margin : 1vh 1vw 3vh;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.select-panel hr{
+    background: #a28c8b;
+    height: 1px;
+    border: 0;
+    width: 100%;
 }
 
 .radio-panel{
-    padding : 2vh 0;
+    padding: 1vh 0;
     text-align: center;
     display: flex;
 }
