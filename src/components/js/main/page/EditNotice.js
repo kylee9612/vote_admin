@@ -4,17 +4,21 @@ import 'react-quill/dist/quill.snow.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import error from "../../side/Error";
+import Delete from "./box/Delete";
 
 const EditNotice = (props) => {
     const id = useParams();
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
-
-    const onChangeTitle = (e) => {setTitle(e.target.value)}
+    const [showImages, setShowImages] = useState([]);
+    const [fileList, setFileList] = useState([]);
+    const onChangeTitle = (e) => {
+        setTitle(e.target.value)
+    }
     let history = useNavigate();
     useEffect(() => {
 
-        console.log(" id.id : " +id.id);
+        console.log(" id.id : " + id.id);
         const nt_no = id.id
         let notice;
         const params = {
@@ -29,48 +33,95 @@ const EditNotice = (props) => {
                 setTitle(notice.nt_title)
                 setText(notice.nt_contents);
             }).catch((error) => {
-                console.log("error :: " + error)
+            console.log("error :: " + error)
         })
     }, [])
 
 
-    function editNotice(id) {
-        const url = "/api/notice/editNotice"
+    function editNotice(event) {
+        event.preventDefault()
         const params = {
-            "nt_no" : id ,
-            "nt_title" : title ,
-            "nt_contents" : text
+            "nt_no": id,
+            "nt_title": title,
+            "nt_contents": text
         };
+        let formData = new FormData(event.currentTarget);
+        formData.append("notice_pic_list",fileList);
+        formData.append("params" ,params);
+        // for(let key of formData.keys()){
+        //     console.log(key+" : "+ formData.get(key));
+        // }
 
-        axios.post(url,params)
-            .then((response) =>{
+        const url = "/api/notice/editNotice"
+
+        axios.post(url, formData)
+            .then((response) => {
                 console.log(JSON.stringify(response));
                 alert(response.data.message);
 
-            }).catch((error)=>{
-                console.log(JSON.stringify(error));
-                alert(JSON.stringify(error.data.message));
-            }).finally((e)=>{
+            }).catch((error) => {
+            console.log(JSON.stringify(error));
+            alert(JSON.stringify(error.data.message));
+        }).finally((e) => {
             history(-1)
-            })
+        })
     }
 
-    return <>
+    function imagesPreview(event) {
+        const imageLists = event.target.files;
+        let imageUrlLists = [...showImages];
+        let file = [...fileList];
+
+        for (let i = 0; i < imageLists.length; i++) {
+            const currentImageUrl = URL.createObjectURL(imageLists[i]);
+            imageUrlLists.push(currentImageUrl);
+            file.push(imageLists[i])
+        }
+
+        if (imageUrlLists.length > 10) {
+            imageUrlLists = imageUrlLists.slice(0, 10);
+        }
+
+        setShowImages(imageUrlLists);
+        setFileList(file);
+    }
+
+    const handleDeleteImage = (id) => {
+
+    };
+
+    return <form id={"noti_form"} onSubmit={editNotice} encType="multipart/form-data">
         <div className={"editNotice_wrap"}>
             <div className={"editNotice_head_wrap"}>
-                <label htmlFor={"title"} >제목</label>
+                <input type={"hidden"} id={"nt_no"} value={id.id}/>
+                <label htmlFor={"title"}>제목</label>
                 <input id="title" type={"text"} value={title} onChange={onChangeTitle}/>
             </div>
             <div className={"editNotice_contents_wrap"}>
                 <label></label>
                 <ReactQuill value={text} onChange={setText}></ReactQuill>
             </div>
+            <div className={"form-image"}>
+                {showImages.map((image, id) => (
+                    <div className={"image-container"} key={id}>
+                        <img src={image} alt={`${image}-${id}`} width={"100px"} height={"100px"}/>
+                        <Delete onClick={() => handleDeleteImage(id)}/>
+                    </div>
+                ))}
+                <label htmlFor={"file"} className={"label-file"}>
+                    <div className={"div-file"}>
+                        <span>파일 업로드</span>
+                    </div>
+                </label>
+                <input id={"file"} type={"file"} accept={"image/*"} name={"noti_pic"} multiple placeholder={"이미지 파일"}
+                       onChange={imagesPreview}/>
+            </div>
         </div>
         <div className={"editNotice_footer"}>
-            <button onClick={() => editNotice(id.id)}>등록하기</button>
-            <button onClick={() => history(-1)}>뒤로가기</button>
+            <button type="submit" >등록하기</button>
+            <button type="button" onClick={() => history(-1)}>뒤로가기</button>
         </div>
-    </>
+    </form>
 }
 
 export default EditNotice
