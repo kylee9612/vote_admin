@@ -49,12 +49,15 @@ function App() {
                         <Route path="/" element={<Login btnLogin={btnLogin}/>}></Route>
                         <Route path="/main" element={<Main prop={prop}/>}>
                             <Route path="" element={<Admin prop={prop}/>}></Route>
-                            <Route path="addVote" element={<AddVote prop={prop}/>}></Route>
-                            <Route path="addCoin" element={<AddCoin prop={prop}/>}></Route>
-                            <Route path="addNotice" element={<AddNotice prop={prop}/>}></Route>
-                            <Route path="addAdmin" element={<AddAdmin prop={prop}/>}></Route>
-                            <Route path="voteResult" element={<VoteResult prop={prop}/>}></Route>
-                            <Route path="addNotice/:id" element={<EditNotice prop={prop}/>}></Route>
+                            <Route path={"vote"}>
+                                <Route path={""} element={<AddVote prop={prop}/>}></Route>
+                                <Route path="lists" element={<VoteResult prop={prop}/>}></Route>
+                                <Route path="results" element={<VoteResult prop={prop}/>}></Route>
+                            </Route>
+                            <Route path="coins" element={<AddCoin prop={prop}/>}></Route>
+                            <Route path="notice" element={<AddNotice prop={prop}/>}></Route>
+                            <Route path="admin" element={<AddAdmin prop={prop}/>}></Route>
+                            <Route path="notice/:id" element={<EditNotice prop={prop}/>}></Route>
                         </Route>
                         <Route path={"*"} element={<Error prop={prop}/>}></Route>
                     </Routes>

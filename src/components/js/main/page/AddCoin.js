@@ -35,7 +35,7 @@ function AddCoin(prop) {
     ];
 
     useEffect(() => {
-        axios.get("/api/admin/addCoin")
+        axios.get("/api/admin/coins")
             .then(response => {
                 let data = response.data.data;
                 setRound((data.roundList).map(element => {
@@ -60,7 +60,7 @@ function AddCoin(prop) {
         })
         formData.append("coin_info", text)
 
-        axios.post("/api/admin/addCoin", formData)
+        axios.post("/api/admin/coins", formData)
             .then(response => {
                 let data = response.data;
                 Swal.fire({
