@@ -47,29 +47,33 @@
 /*    align-items: center;*/
 /*}*/
 
-form input:focus, form textarea:focus, form select:focus{
+form .form-input-num:focus,
+form .form-input-text:focus,
+form .form-select:focus{
     border: 2px solid rgba(113,185,199,0.58);
     transition: 0.7s;
 }
 
-form input, form select, form textarea{
+form .form-input-num,
+form .form-select,
+form .form-input-text{
     margin: 1vh 1vw;
     border: 2px solid rgba(0,0,0,0.27);
     transition: 0.7s;
 }
 
-form textarea{
-    padding: 1vh 1vw;
+form .text-editor{
+    margin: 1vh 1vw;
 }
 
-form button{
+form .form-button{
     margin: 1vh;
     border: 2px solid rgba(199,157,132,0.58);
     background-color: #ffe8e5;
     transition: all 1s;
 }
 
-form button:hover{
+form .form-button:hover{
     border: 2px solid rgba(255, 117, 124, 0.58);
     background-color: #ffc9bf;
     transition: all 1s;
