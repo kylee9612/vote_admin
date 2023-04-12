@@ -13,6 +13,7 @@ import VoteResult from "./components/js/main/page/VoteResult";
 import Error from "./components/js/side/Error";
 import Admin from "./components/js/main/page/Admin";
 import EditNotice from "./components/js/main/page/EditNotice";
+import Menu from "./components/js/main/fixed/Menu";
 
 function App() {
 

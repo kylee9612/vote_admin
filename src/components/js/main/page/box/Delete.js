@@ -1,7 +1,9 @@
-function Delete() {
+function Delete({deleteHandler}) {
 
-    return(
-        <span className="material-symbols-outlined delete-icon">close</span>
+    return (
+        <div className={"delete-icon"} onClick={deleteHandler}>
+            <span className="material-symbols-outlined">close</span>
+        </div>
     )
 }
 

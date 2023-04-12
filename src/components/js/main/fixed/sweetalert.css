@@ -3,7 +3,7 @@
     width: 28em;
 }
 .swal2-title{
-    background: #000;
+    background: #ffffff;
     color:#fff;
     font-size: 1em;
     padding: 0.8em 1em;
@@ -20,7 +20,7 @@
     border-radius: 0;
 }
 .swal2-actions .swal2-confirm:hover{
-    background: #000;
+    background: #ffffff;
 }
 
 .swal2-actions .swal2-deny{
