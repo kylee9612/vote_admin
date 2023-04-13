@@ -2,7 +2,7 @@ import "./Menu.css"
 
 function Menu({navigate}) {
 
-    const navList = ['/main/addVote', '/main/addCoin', '/main/voteResult', '/main/addAdmin', '/main/addNotice']
+    const navList = ['/main/vote', '/main/coins', '/main/vote/lists' ,'/main/vote/results', '/main/admin', '/main/notice']
 
     const navigateTo = (event) => {
         event.preventDefault()
@@ -24,9 +24,10 @@ function Menu({navigate}) {
             <ul className={'menu'}>
                 <li onClick={navigateTo} value={0}><span>투표 추가</span></li>
                 <li onClick={navigateTo} value={1}><span>코인 추가</span></li>
-                <li onClick={navigateTo} value={2}><span>투표 결과 조회</span></li>
-                <li onClick={navigateTo} value={3}><span>조합원 추가</span></li>
-                <li onClick={navigateTo} value={4}><span>공지 사항</span></li>
+                <li onClick={navigateTo} value={2}><span>투표 관리</span></li>
+                <li onClick={navigateTo} value={3}><span>투표 결과 조회</span></li>
+                <li onClick={navigateTo} value={4}><span>조합원 추가</span></li>
+                <li onClick={navigateTo} value={5}><span>공지 사항</span></li>
             </ul>
         </nav>
     )

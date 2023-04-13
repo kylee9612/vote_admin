@@ -16,7 +16,7 @@ function Admin() {
     const [doughnut, setDoughnut] = useState([]);
 
     useEffect(() => {
-        axios.get("/api/admin/voteResult")
+        axios.get("/api/admin/vote/results")
             .then(response => {
                 let data = response.data;
                 setDoughnut(
