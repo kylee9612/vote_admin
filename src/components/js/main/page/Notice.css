@@ -1,25 +1,3 @@
-
-/*.notice_header {*/
-/*    max-width: 1280px;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    margin:0 auto;*/
-/*    position: relative;*/
-/*}*/
-/*.notice_header ::after{*/
-/*    content: "";*/
-/*    position: absolute;*/
-/*    left: 0px;*/
-/*    bottom: -2px;*/
-/*    height: 3px;*/
-/*    width: 95%;*/
-/*    background: #282c34;*/
-/*    transform: scaleX(1);*/
-/*    transition: transform 500ms ease;*/
-/*    transform-origin: left;*/
-
-/*}*/
-
 .notice_header_sub{
     font-size: 15px;
     display: flex;
@@ -61,3 +39,12 @@
     cursor: pointer;
 }
 
+
+
+.editNotice_head_wrap{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,7 +1,7 @@
 import React, {useEffect, useState } from "react";
 import axios from 'axios';
 /** CSS **/
-import './NoticeList.css';
+import './Notice.css';
 /** Component **/
 
 import Pagination from "../Util/Pagination";

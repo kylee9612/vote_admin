@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 /** CSS **/
-import './NoticeList.css';
+import './Notice.css';
 /** Component **/
 import Modal from "../Util/Modal";
 import axios from "axios";
