@@ -17,25 +17,67 @@ const EditNotice = (props) => {
     }
     let history = useNavigate();
     useEffect(() => {
-
-        console.log(" id.id : " + id.id);
         const nt_no = id.id
-        let notice;
         const params = {
             "nt_no": nt_no
         }
         axios.post("/api/notice/getNotice", params)
             .then((response) => {
                 const notice = response.data.data.notice;
-                console.log("response :: " + JSON.stringify(notice.nt_title))
-                console.log("response :: " + notice.nt_contents)
-
+                const notice_pic = response.data.data.noticePictures;
+                console.log(response.data.data.noticePictures);
                 setTitle(notice.nt_title)
                 setText(notice.nt_contents);
+                imagesPreviewUseEffect(notice_pic); // noticePictures를 fileList에 업데이트
             }).catch((error) => {
             console.log("error :: " + error)
         })
     }, [])
+    function blobToImageFile(blobData, fileName) {
+        return new File([blobData], fileName);
+    }
+    function imagesPreviewUseEffect(imageLists){
+        let imageUrlLists = [...showImages];
+        let file = [...fileList];
+        for(let i = 0 ; i < imageLists.length ; i ++) {
+            // 받아온 이미지 데이터를 Blob으로 변환
+            const blob = new Blob([imageLists[i].picture], { type: "image/jpeg" });
+            console.log(blob);
+            // Blob을 File로 변환
+            const imageFile = blobToImageFile(imageLists[i].picture,(imageLists[i].nt_no + "_" + imageLists[i].order_idx + ".jpg"))
+            console.log(imageFile);
+
+            imageUrlLists.push(imageFile);
+            // fileList에 File 추가
+            file.push([imageFile]);
+        }
+        if (imageUrlLists.length > 10) {
+            imageUrlLists = imageUrlLists.slice(0, 10);
+        }
+
+        setShowImages(imageUrlLists);
+        setFileList(file);
+    }
+    function imagesPreview(event) {
+        const imageLists = event.target.files;
+        console.log(imageLists);
+        let imageUrlLists = [...showImages];
+        let file = [...fileList];
+
+        for (let i = 0; i < imageLists.length; i++) {
+            console.log(imageLists[i]);
+            const currentImageUrl = URL.createObjectURL(imageLists[i]);
+            imageUrlLists.push(currentImageUrl);
+            file.push(imageLists[i])
+        }
+
+        if (imageUrlLists.length > 10) {
+            imageUrlLists = imageUrlLists.slice(0, 10);
+        }
+
+        setShowImages(imageUrlLists);
+        setFileList(file);
+    }
 
     function emptyCheck(){
         if(title == "" || text == ""){
@@ -69,11 +111,11 @@ const EditNotice = (props) => {
                 ,})
                 .then((response) => {
                     console.log(JSON.stringify(response));
-                    alert(response.data.body.message);
+                    alert(response.data.message);
 
                 }).catch((error) => {
                 console.log(JSON.stringify(error));
-                alert(JSON.stringify(error.message));
+                alert(JSON.stringify(error.data.message));
             }).finally((e) => {
                 history(-1)
             })
@@ -82,30 +124,17 @@ const EditNotice = (props) => {
         }
     }
 
-    function imagesPreview(event) {
-        const imageLists = event.target.files;
-        let imageUrlLists = [...showImages];
-        let file = [...fileList];
-
-        for (let i = 0; i < imageLists.length; i++) {
-            const currentImageUrl = URL.createObjectURL(imageLists[i]);
-            imageUrlLists.push(currentImageUrl);
-            file.push(imageLists[i])
-        }
-
-        if (imageUrlLists.length > 10) {
-            imageUrlLists = imageUrlLists.slice(0, 10);
-        }
-
-        setShowImages(imageUrlLists);
-        setFileList(file);
-    }
-
     const handleDeleteImage = (id) => {
-
+        setShowImages(showImages.filter((_, index) => index !== id));
+        setFileList(fileList.filter((_, index) => index !== id));
     };
 
-    return <form id={"noti_form"} onSubmit={editNotice} encType="multipart/form-data">
+    const deleteHandler = (id) => {
+        handleDeleteImage(id)
+    }
+
+
+    return (<form id={"noti_form"} onSubmit={editNotice} encType="multipart/form-data">
         <div className={"editNotice_wrap"}>
             <div className={"editNotice_head_wrap"}>
                 <input type={"hidden"} id={"nt_no"} name={"nt_no"} value={id.id}/>
@@ -120,10 +149,10 @@ const EditNotice = (props) => {
             </div>
             <div className={"form-image"}>
                 {showImages.map((image, id) => (
-                    <div className={"image-container"} key={id}>
-                        <img src={image} alt={`${image}-${id}`} width={"100px"} height={"100px"}/>
-                        <Delete onClick={() => handleDeleteImage(id)}/>
-                    </div>
+                        <div className={"image-container"} key={id}>
+                            <img src={image} alt={`${image}-${id}`} width={"100px"} height={"100px"}/>
+                            <Delete onClick={() => deleteHandler(id)}/>
+                        </div>
                 ))}
                 <label htmlFor={"file"} className={"label-file"}>
                     <div className={"div-file"}>
@@ -138,7 +167,7 @@ const EditNotice = (props) => {
             <button type="submit">등록하기</button>
             <button type="button" onClick={() => history(-1)}>뒤로가기</button>
         </div>
-    </form>
+    </form>)
 }
 
 export default EditNotice
