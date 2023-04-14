@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 /** CSS **/
 import './NoticeList.css';
 /** Component **/
-import Modal from "../Util/Modal";
-import axios from "axios";
 
 function Notice({notice, searchText, searchType , goEditNotice}) {
     let noticeList = "";

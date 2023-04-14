@@ -5,14 +5,14 @@ import React, {useEffect, useState} from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import Header from "./components/js/side/Header";
-import AddCoin from "./components/js/main/page/AddCoin";
-import AddVote from "./components/js/main/page/AddVote";
-import AddNotice from "./components/js/main/page/AddNotice";
-import AddAdmin from "./components/js/main/page/AddAdmin";
-import VoteResult from "./components/js/main/page/VoteResult";
+import AddCoin from "./components/js/main/page/coin/AddCoin";
+import AddVote from "./components/js/main/page/vote/AddVote";
+import AddNotice from "./components/js/main/page/notice/AddNotice";
+import AddAdmin from "./components/js/main/page/admin/AddAdmin";
+import VoteResult from "./components/js/main/page/vote/VoteResult";
 import Error from "./components/js/side/Error";
-import Admin from "./components/js/main/page/Admin";
-import EditNotice from "./components/js/main/page/EditNotice";
+import Admin from "./components/js/main/page/admin/Admin";
+import EditNotice from "./components/js/main/page/notice/EditNotice";
 import Menu from "./components/js/main/fixed/Menu";
 
 function App() {

@@ -3,7 +3,7 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import error from "../../side/Error";
+import error from "../../../side/Error";
 
 const EditNotice = (props) => {
     const id = useParams();

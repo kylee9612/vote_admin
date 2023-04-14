@@ -1,6 +1,6 @@
 import "./VoteResult.css"
 
-import DoughnutChart from "./box/DoughnutChart";
+import DoughnutChart from "../box/DoughnutChart";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
