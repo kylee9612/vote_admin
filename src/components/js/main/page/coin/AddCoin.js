@@ -1,11 +1,9 @@
 import "./AddCoin.css"
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Delete from "./box/Delete";
-import ReactQuill from "react-quill";
-import CustomToolBar from "./box/CustomToolBar"
-import EditorComponent from "./box/EditorComponent";
+import Delete from "../box/Delete";
+import EditorComponent from "../box/EditorComponent";
 
 function AddCoin(prop) {
     const [round, setRound] = useState([])

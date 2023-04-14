@@ -4,13 +4,10 @@ import axios from 'axios';
 import './Notice.css';
 /** Component **/
 
-import Pagination from "../Util/Pagination";
+import Pagination from "../../Util/Pagination";
 import Notice from "./Notice";
-import Search from "../Util/Search";
-import EditNotice from "./EditNotice";
-import {Route, Router, Routes, useLocation, useNavigate, useParams} from "react-router-dom";
-import Login from "../../side/Login";
-
+import Search from "../../Util/Search";
+import {useLocation, useNavigate} from "react-router-dom";
 const AddNotice = (props) => {
    // const notice = NoticeDummyList
    const location = useLocation()

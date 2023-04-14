@@ -149,10 +149,10 @@ const EditNotice = (props) => {
             </div>
             <div className={"form-image"}>
                 {showImages.map((image, id) => (
-                        <div className={"image-container"} key={id}>
-                            <img src={image} alt={`${image}-${id}`} width={"100px"} height={"100px"}/>
-                            <Delete onClick={() => deleteHandler(id)}/>
-                        </div>
+                    <div className={"image-container"} key={id}>
+                        <img src={image} alt={`${image}-${id}`} width={"100px"} height={"100px"}/>
+                        <Delete onClick={() => deleteHandler(id)}/>
+                    </div>
                 ))}
                 <label htmlFor={"file"} className={"label-file"}>
                     <div className={"div-file"}>
