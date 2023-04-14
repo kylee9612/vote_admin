@@ -3,11 +3,11 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import error from "../../side/Error";
-import Delete from "./box/Delete";
+import Delete from "../box/Delete";
 
 const EditNotice = (props) => {
     const id = useParams();
+    const nt_no = id.id;
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [showImages, setShowImages] = useState([]);
@@ -17,7 +17,6 @@ const EditNotice = (props) => {
     }
     let history = useNavigate();
     useEffect(() => {
-        const nt_no = id.id
         const params = {
             "nt_no": nt_no
         }
@@ -33,28 +32,17 @@ const EditNotice = (props) => {
             console.log("error :: " + error)
         })
     }, [])
-    function blobToImageFile(blobData, fileName) {
-        return new File([blobData], fileName);
-    }
     function imagesPreviewUseEffect(imageLists){
         let imageUrlLists = [...showImages];
         let file = [...fileList];
         for(let i = 0 ; i < imageLists.length ; i ++) {
-            // 받아온 이미지 데이터를 Blob으로 변환
-            const blob = new Blob([imageLists[i].picture], { type: "image/jpeg" });
-            console.log(blob);
-            // Blob을 File로 변환
-            const imageFile = blobToImageFile(imageLists[i].picture,(imageLists[i].nt_no + "_" + imageLists[i].order_idx + ".jpg"))
-            console.log(imageFile);
-
-            imageUrlLists.push(imageFile);
-            // fileList에 File 추가
-            file.push([imageFile]);
+            const blob = imageLists[i].picture;
+            const currentImageUrl = "data:image/*;base64,"+blob;
+            imageUrlLists.push(currentImageUrl);
         }
         if (imageUrlLists.length > 10) {
             imageUrlLists = imageUrlLists.slice(0, 10);
         }
-
         setShowImages(imageUrlLists);
         setFileList(file);
     }
@@ -70,11 +58,9 @@ const EditNotice = (props) => {
             imageUrlLists.push(currentImageUrl);
             file.push(imageLists[i])
         }
-
         if (imageUrlLists.length > 10) {
             imageUrlLists = imageUrlLists.slice(0, 10);
         }
-
         setShowImages(imageUrlLists);
         setFileList(file);
     }
@@ -91,53 +77,52 @@ const EditNotice = (props) => {
         let start = emptyCheck();
         if(start){
             let formData = new FormData(event.currentTarget);
-
             formData.append("nt_contents", text)
-            fileList.map((pic, index) => {
-                formData.append("notice_pic_list", pic);
-            })
-            // formData.append("params", params);
-
-            for (let key of formData.keys()) {
-                console.log(key, ":", formData.get(key));
-            }
-
+            fileList.map((pic, index) => {formData.append("notice_pic_list", pic);})
+            for (let key of formData.keys()) {console.log(key, ":", formData.get(key));}
             const url = "/api/notice/editNotice"
+            axios.post(url, formData ,{headers: {'Content-Type': 'multipart/form-data'},})
+                .then((response) => {console.log(JSON.stringify(response));alert(response.data.message);
+                }).catch((error) => {console.log(JSON.stringify(error));alert(JSON.stringify(error.data.message));
+            }).finally((e) => {history(-1)})
+        }else{alert("제목과 내용을 확인해 주세요.")}}
 
-            axios.post(url, formData ,{
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-                ,})
-                .then((response) => {
-                    console.log(JSON.stringify(response));
-                    alert(response.data.message);
+    // const handleDeleteImage = (id) => {
+    //     setShowImages(showImages.filter((_, index) => index !== id));
+    //     setFileList(fileList.filter((_, index) => index !== id));
+    // };
 
-                }).catch((error) => {
-                console.log(JSON.stringify(error));
-                alert(JSON.stringify(error.data.message));
-            }).finally((e) => {
-                history(-1)
-            })
-        }else{
-            alert("제목과 내용을 확인해 주세요.")
+    const handleDeleteImage = (id , image) => {
+        console.log(image);
+        const isBase64 = "data:image/*;base64,";
+        if(image.indexOf(isBase64) !== -1){
+            alert("맞으면 db 에서 지워야 됑");
+            console.log("nt_no : "+ nt_no + id);
+            const url = "/api/notice/deleteNoticeImage";
+            const parms = {
+                "nt_no" : nt_no ,
+                "order_idx" : id
+            }
+            axios.post(url,parms).then({
+
+            }).catch(
+                alert("이미지 삭제가 실패했습니다. \n관리자에게 문의 하세요.")
+            )
         }
-    }
-
-    const handleDeleteImage = (id) => {
         setShowImages(showImages.filter((_, index) => index !== id));
         setFileList(fileList.filter((_, index) => index !== id));
     };
 
-    const deleteHandler = (id) => {
-        handleDeleteImage(id)
+
+    const deleteHandler = (id , image ) => {
+        handleDeleteImage(id, image)
     }
 
 
     return (<form id={"noti_form"} onSubmit={editNotice} encType="multipart/form-data">
         <div className={"editNotice_wrap"}>
             <div className={"editNotice_head_wrap"}>
-                <input type={"hidden"} id={"nt_no"} name={"nt_no"} value={id.id}/>
+                <input type={"hidden"} id={"nt_no"} name={"nt_no"} value={nt_no}/>
                 <label htmlFor={"title"}>제목</label>
                 <input id="title" type={"text"} name={"nt_title"} onChange={onChangeTitle} value={title}
                        style={{width: "90%"}}/>
@@ -151,7 +136,7 @@ const EditNotice = (props) => {
                 {showImages.map((image, id) => (
                     <div className={"image-container"} key={id}>
                         <img src={image} alt={`${image}-${id}`} width={"100px"} height={"100px"}/>
-                        <Delete onClick={() => deleteHandler(id)}/>
+                        <Delete deleteHandler={() => deleteHandler(id, image)}/>
                     </div>
                 ))}
                 <label htmlFor={"file"} className={"label-file"}>
