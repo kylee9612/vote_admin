@@ -56,7 +56,7 @@ function AddCoin(prop) {
         fileList.map((pic, index) => {
             formData.append("coin_pic_list", pic);
         })
-        formData.append("coin_info", text)
+        formData.append("coinInfo", text)
 
         axios.post("/api/admin/coins", formData)
             .then(response => {
@@ -125,11 +125,10 @@ function AddCoin(prop) {
                             ))
                         }
                     </select>
-                    <input type={"text"} placeholder={"코인 약자"} name={"coin_symbol"} className={"form-input-text"}/>
-                    <input type={"text"} placeholder={"코인 명"} name={"coin_name"} className={"form-input-text"}/>
+                    <input type={"text"} placeholder={"코인 약자"} name={"coinSymbol"} className={"form-input-text"}/>
+                    <input type={"text"} placeholder={"코인 명"} name={"coinName"} className={"form-input-text"}/>
                 </div>
                 <div className={"form-middle"}>
-                    {/*<CustomToolBar />*/}
                     <EditorComponent modules={modules} formats={formats} value={text} onChange={handleText}/>
                     <div className={"form-image"}>
                         <div className={"image-div"}>

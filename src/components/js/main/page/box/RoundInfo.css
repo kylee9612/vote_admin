@@ -1,0 +1,26 @@
+.roundInfo{
+    width: 25%;
+    min-height: 100%;
+    min-width: 250px;
+    max-width: 350px;
+    margin: 0 2vw;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.roundInfo:hover {
+    transform: scale(1.04) rotate(1deg);
+}
+
+.roundInfo h1{
+    text-align: center;
+}
+
+.roundInfo-inner{
+    padding : 1vh 1vw;
+    min-width: 100%;
+    min-height: 100%;
+    background: rgba(224, 132, 132, 0.05);
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+}

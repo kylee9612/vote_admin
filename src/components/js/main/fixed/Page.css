@@ -56,7 +56,8 @@ form .form-select:focus{
 
 form .form-input-num,
 form .form-select,
-form .form-input-text{
+form .form-input-text,
+form .form-input-date{
     margin: 1vh 1vw;
     border: 2px solid rgba(0,0,0,0.27);
     transition: 0.7s;

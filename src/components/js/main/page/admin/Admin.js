@@ -2,6 +2,7 @@ import "./Admin.css"
 import DoughnutChart from "../box/DoughnutChart";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function Admin() {
 
@@ -25,7 +26,11 @@ function Admin() {
                 }))
             })
             .catch(error => {
-                alert(error)
+                Swal.fire({
+                    icon : "error",
+                    showConfirmButton: "OK",
+                    title : "ERROR OCCURRED"
+                })
             })
     }, [])
 

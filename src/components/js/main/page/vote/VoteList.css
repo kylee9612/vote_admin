@@ -1,0 +1,7 @@
+.roundList{
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+    height: 75%;
+    padding : 5vh 1vw;
+}

@@ -31,7 +31,7 @@ class EditorComponent extends Component{
     render(){
         const { value, onChange } = this.props;
         return(
-            <div className={"text-editor"} style={{height: "500px", width : "80%"}}>
+            <div className={"text-editor"} style={{height: "500px", width : "100%"}}>
                 <ReactQuill
                     style={{height: "450px"}}
                     theme="snow"

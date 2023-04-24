@@ -1,0 +1,45 @@
+.vote-form{
+    width: 100%;
+}
+
+.vote-form .form-input-text{
+    max-height: 40px;
+    height: 35px;
+    min-width: 20vw;
+    text-align: center;
+    font-size: 15px;
+}
+
+.vote-form .form-input-date{
+    max-height: 40px;
+    height: 35px;
+    min-width: 10vw;
+    text-align: center;
+}
+
+.vote-form .form-input-date::before{
+    content: attr(date-placeholder);
+    width: 100%;
+}
+
+.vote-form .form-input-date:focus::before,
+.vote-form .form-input-date:valid::before{
+    display: none;
+}
+
+.vote-form .form-button{
+    max-height: 40px;
+    height: 38px;
+    min-width: 10vw;
+    margin: 1vh 1vw;
+}
+
+.vote-form .form-select{
+    height: 50px;
+    max-height: 40px;
+    min-width: 5vw;
+}
+
+.datepicker-div{
+    display: flex;
+}
