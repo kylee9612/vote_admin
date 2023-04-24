@@ -63,7 +63,7 @@ function AddVote() {
                 "Content-Type": `application/json`, // application/json 타입 선언
             },
         }).then(response => {
-            if (Number(response.data.code) === 0o000) {
+            if (response.data.code == "0000") {
                 Swal.fire({
                     showConfirmButton: "OK",
                     icon: "success",
