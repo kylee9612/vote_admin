@@ -1,9 +1,9 @@
 import "./RoundInfo.css"
 import DatePicker from "react-datepicker";
 
-function RoundInfo({data, index}) {
+function RoundInfo({data, index,clickEvent}) {
     return (
-        <div className={"round-info"}>
+        <div className={"round-info"} onClick={clickEvent}>
             <div className={"round-info-inner"}>
                 <h2>{index + 1}회차</h2>
                 <h3>{data.title}</h3>
