@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import ReactQuill from 'react-quill';
+import ReactQuill, {Quill} from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
+import ImageResize from "@looop/quill-image-resize-module-react";
+Quill.register('modules/ImageResize', ImageResize);
 class EditorComponent extends Component{
+
     constructor(props){
         super(props);
     }
-
     modules = {
         toolbar: [
             //[{ 'font': [] }],
@@ -17,6 +18,9 @@ class EditorComponent extends Component{
             [{ 'align': [] }, { 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
             ['clean']
         ],
+        ImageResize: {
+            parchment: Quill.import('parchment')
+        }
     }
 
     formats = [
@@ -30,8 +34,11 @@ class EditorComponent extends Component{
 
     render(){
         const { value, onChange } = this.props;
+
+        //  이미지 클릭 후, 삭제 버튼 클릭시 에러 방지
+        window.Quill = Quill
         return(
-            <div className={"text-editor"} style={{height: "500px", width : "80%"}}>
+            <div className={"text-editor"} style={{height: "500px", width : "100%"}}>
                 <ReactQuill
                     style={{height: "450px"}}
                     theme="snow"

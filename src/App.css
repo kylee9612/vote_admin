@@ -62,7 +62,9 @@ input , textarea, select{
     padding-left: 1vh;
 }
 
-input:focus , textarea:focus, select:focus{
+input:focus ,
+textarea:focus,
+select:focus{
     outline: none;
 }
 
