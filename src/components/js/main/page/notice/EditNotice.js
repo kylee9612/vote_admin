@@ -27,17 +27,18 @@ const EditNotice = (props) => {
                 console.log(response.data.data.noticePictures);
                 setTitle(notice.nt_title)
                 setText(notice.nt_contents);
-                imagesPreviewUseEffect(notice_pic); // noticePictures를 fileList에 업데이트
+                imagesPreviewFromDB(notice_pic); // noticePictures를 fileList에 업데이트
             }).catch((error) => {
             console.log("error :: " + error)
         })
     }, [])
-    function imagesPreviewUseEffect(imageLists){
+
+    function imagesPreviewFromDB(imageLists) {
         let imageUrlLists = [...showImages];
         let file = [...fileList];
-        for(let i = 0 ; i < imageLists.length ; i ++) {
+        for (let i = 0; i < imageLists.length; i++) {
             const blob = imageLists[i].picture;
-            const currentImageUrl = "data:image/*;base64,"+blob;
+            const currentImageUrl = "data:image/*;base64," + blob;
             imageUrlLists.push(currentImageUrl);
         }
         if (imageUrlLists.length > 10) {
@@ -46,17 +47,18 @@ const EditNotice = (props) => {
         setShowImages(imageUrlLists);
         setFileList(file);
     }
+
     function imagesPreview(event) {
         const imageLists = event.target.files;
-        console.log(imageLists);
         let imageUrlLists = [...showImages];
         let file = [...fileList];
 
         for (let i = 0; i < imageLists.length; i++) {
-            console.log(imageLists[i]);
             const currentImageUrl = URL.createObjectURL(imageLists[i]);
             imageUrlLists.push(currentImageUrl);
             file.push(imageLists[i])
+            const newImageIndex = imageUrlLists.length - 1; // 새로운 이미지의 인덱스
+            console.log("새로운 이미지의 인덱스: ", newImageIndex);
         }
         if (imageUrlLists.length > 10) {
             imageUrlLists = imageUrlLists.slice(0, 10);
@@ -65,56 +67,66 @@ const EditNotice = (props) => {
         setFileList(file);
     }
 
-    function emptyCheck(){
-        if(title == "" || text == ""){
+    function emptyCheck() {
+        if (title == "" || text == "") {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
+
     function editNotice(event) {
         event.preventDefault()
         let start = emptyCheck();
-        if(start){
+        if (start) {
             let formData = new FormData(event.currentTarget);
             formData.append("nt_contents", text)
-            fileList.map((pic, index) => {formData.append("notice_pic_list", pic);})
-            for (let key of formData.keys()) {console.log(key, ":", formData.get(key));}
+            fileList.map((pic, index) => {
+                formData.append("notice_pic_list", pic);
+            })
+            for (let key of formData.keys()) {
+                console.log(key, ":", formData.get(key));
+            }
             const url = "/api/notice/editNotice"
-            axios.post(url, formData ,{headers: {'Content-Type': 'multipart/form-data'},})
-                .then((response) => {console.log(JSON.stringify(response));alert(response.data.message);
-                }).catch((error) => {console.log(JSON.stringify(error));alert(JSON.stringify(error.data.message));
-            }).finally((e) => {history(-1)})
-        }else{alert("제목과 내용을 확인해 주세요.")}}
+            axios.post(url, formData, {headers: {'Content-Type': 'multipart/form-data'},})
+                .then((response) => {
+                    console.log(JSON.stringify(response));
+                    alert(response.data.message);
+                }).catch((error) => {
+                console.log(JSON.stringify(error));
+                alert(JSON.stringify(error.data.message));
+            }).finally((e) => {
+                history(-1)
+            })
+        } else {
+            alert("제목과 내용을 확인해 주세요.")
+        }
+    }
 
-    // const handleDeleteImage = (id) => {
-    //     setShowImages(showImages.filter((_, index) => index !== id));
-    //     setFileList(fileList.filter((_, index) => index !== id));
-    // };
-
-    const handleDeleteImage = (id , image) => {
+    const handleDeleteImage = (id, image) => {
         console.log(image);
         const isBase64 = "data:image/*;base64,";
-        if(image.indexOf(isBase64) !== -1){
-            alert("맞으면 db 에서 지워야 됑");
-            console.log("nt_no : "+ nt_no + id);
+        if (image.indexOf(isBase64) !== -1) {
+            console.log("nt_no : " + nt_no + " _ " + id);
             const url = "/api/notice/deleteNoticeImage";
             const parms = {
-                "nt_no" : nt_no ,
-                "order_idx" : id
+                "nt_no": nt_no,
+                "order_idx": id
             }
-            axios.post(url,parms).then({
-
-            }).catch(
-                alert("이미지 삭제가 실패했습니다. \n관리자에게 문의 하세요.")
-            )
+            axios.post(url, parms).then((e) => {
+                console.log(e);
+            })
+                .catch((e) => {
+                    console.log(e);
+                    alert("이미지 삭제가 실패했습니다. \n관리자에게 문의하세요.");
+                });
         }
         setShowImages(showImages.filter((_, index) => index !== id));
         setFileList(fileList.filter((_, index) => index !== id));
     };
 
 
-    const deleteHandler = (id , image ) => {
+    const deleteHandler = (id, image) => {
         handleDeleteImage(id, image)
     }
 
@@ -126,7 +138,7 @@ const EditNotice = (props) => {
                 <label htmlFor={"title"}>제목</label>
                 <input id="title" type={"text"} name={"nt_title"} onChange={onChangeTitle} value={title}
                        style={{width: "90%"}}/>
-                <button type={"button"} >삭제</button>
+                <button type={"button"}>삭제</button>
             </div>
             <div className={"editNotice_contents_wrap"}>
                 <label></label>
