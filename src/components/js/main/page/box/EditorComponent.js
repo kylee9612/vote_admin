@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import ReactQuill from 'react-quill';
+import ReactQuill, {Quill} from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
+import ImageResize from "@looop/quill-image-resize-module-react";
+Quill.register('modules/ImageResize', ImageResize);
 class EditorComponent extends Component{
+
     constructor(props){
         super(props);
     }
-
     modules = {
         toolbar: [
             //[{ 'font': [] }],
@@ -17,6 +18,9 @@ class EditorComponent extends Component{
             [{ 'align': [] }, { 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
             ['clean']
         ],
+        ImageResize: {
+            parchment: Quill.import('parchment')
+        }
     }
 
     formats = [

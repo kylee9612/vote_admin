@@ -1,16 +1,17 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import RoundInfo from "../box/RoundInfo";
-import "./VoteList.css"
+import RoundInfo from "./RoundInfo";
+import "./RoundList.css"
 
-function VoteList(prop) {
+function RoundList(prop) {
 
     const [list, setList] = useState([]);
 
     useEffect(() => {
-        axios.get("/api/admin/vote/list", "")
+        axios.get("/api/admin/round/list", "")
             .then((response) => {
                 setList(response.data.data)
+                console.log(response.data)
             })
             .catch((error) => {
 
@@ -30,4 +31,4 @@ function VoteList(prop) {
     )
 }
 
-export default VoteList;
+export default RoundList;

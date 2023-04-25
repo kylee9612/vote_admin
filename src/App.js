@@ -14,7 +14,7 @@ import Error from "./components/js/side/Error";
 import Admin from "./components/js/main/page/admin/Admin";
 import EditNotice from "./components/js/main/page/notice/EditNotice";
 import Menu from "./components/js/main/fixed/Menu";
-import VoteList from "./components/js/main/page/vote/VoteList";
+import RoundList from "./components/js/main/page/round/RoundList";
 
 function App() {
 
@@ -52,7 +52,7 @@ function App() {
                             <Route path="" element={<Admin prop={prop}/>}></Route>
                             <Route path={"vote"}>
                                 <Route path="" element={<AddVote prop={prop}/>}></Route>
-                                <Route path="lists" element={<VoteList prop={prop}/>}></Route>
+                                <Route path="lists" element={<RoundList prop={prop}/>}></Route>
                                 <Route path="results" element={<VoteResult prop={prop}/>}></Route>
                             </Route>
                             <Route path="coins" element={<AddCoin prop={prop}/>}></Route>

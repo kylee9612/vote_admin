@@ -1,5 +1,4 @@
-import "./Main.css"
-import "../../../App.css"
+ import "../../../App.css"
 import Page from "../main/fixed/Page";
 
 function Main(props) {
