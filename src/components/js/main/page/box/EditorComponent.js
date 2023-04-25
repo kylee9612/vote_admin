@@ -34,6 +34,9 @@ class EditorComponent extends Component{
 
     render(){
         const { value, onChange } = this.props;
+
+        //  이미지 클릭 후, 삭제 버튼 클릭시 에러 방지
+        window.Quill = Quill
         return(
             <div className={"text-editor"} style={{height: "500px", width : "100%"}}>
                 <ReactQuill
