@@ -10,22 +10,34 @@ function RoundList(prop) {
     const [modalProp, setModalProp] = useState("");
     const [modalShow, setModalShow] = useState(false);
 
+    const navigate = prop.prop.navigate;
+
     useEffect(() => {
         axios.get("/api/admin/round/list", "")
             .then((response) => {
                 setList(response.data.data)
             })
             .catch((error) => {
-
             })
     }, [])
 
+    const handleEdit = (round) => {
+        console.log(round)
+        navigate("/")
+    }
+
     const modalHandler = (data) => {
-        let prop = {
-            "header" : data.title,
+        const header = `<h3>`+data.title+`</h3>`
+        const buttonList = [
+            {
+                buttonLabel : "edit",
+                buttonFunc : ()=>handleEdit(data.round)
+            }
+        ]
+        const prop = {
+            "header" : header,
             "content" : data.content,
-            "startDate" : new Date(data.startDate),
-            "endDate" : new Date(data.endDate)
+            "buttonList" : buttonList
         }
         setModalProp(prop)
         setModalShow(true)
