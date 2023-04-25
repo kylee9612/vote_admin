@@ -1,91 +1,84 @@
-import "./AddAdmin.css"
-import modal from "../../Util/Modal";
-import ReactPortal, {useEffect, useState} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Search from "../../Util/Search";
-import React from "react";
 import Pagination from "../../Util/Pagination";
-import Notice from "../notice/Notice";
 import AdminList from "./AdminList";
-function AddAdmin(props){
-    /**search AdminList List**/
+import Modal from "../../Util/Modal";
+import EditAdmin from "./EditAdmin";
+
+function AddAdmin() {
     const [searchText, setSearchText] = useState("");
     const [searchType, setSearchType] = useState(0);
     const [Admin, setAdmin] = useState([]);
-    /**pageNation**/
-    const [curPage, setCurPage] =useState(1);
+    const [curPage, setCurPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
-    /**pageNation**/
-    function searchAdminList(){}
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalType, setModalType] = useState("");
+    const [selectedAdmin, setSelectedAdmin] = useState({});
 
-    useEffect(() =>{
+    useEffect(() => {
+        searchAdminList();
+    }, [searchText, searchType, curPage]);
+
+    function searchAdminList() {
         let adminList = [];
         const params = {
-            "searchText": searchText,
-            "searchType": searchType,
-            "curPage"   : curPage
-        }
-            const url = "/api/admin/getAdminList";
-            axios.post(url,{params}
-            ).then((res)=>{
+            searchText: searchText,
+            searchType: searchType,
+            curPage: curPage,
+        };
+        const url = "/api/admin/getAdminList";
+        axios
+            .post(url, { params })
+            .then((res) => {
                 setLastPage(res.data.data.lastPage);
-                res.data.data.adminList.map((element => {
+                res.data.data.adminList.map((element) => {
                     adminList.push(element);
-                }))
-
-                setAdmin(adminList)
-            }).catch((error)=>{
-                alert('error' + error)
+                });
+                setAdmin(adminList);
             })
-    },[searchText, searchType , curPage])
-
-    const submitForm = (event)=>{
-        event.preventDefault()
-        const url = "/api/admin/addAdmin"
-        // adminDTO와 adminDetailDTO를 나눠서 formData 객체에 추가
-        const formData = new FormData(event.currentTarget);
-        for (let value of formData.values()) {
-            console.log(value);
-        }
-
-        axios.post(url, formData,{
-            headers: {
-                "Content-Type": `application/json`, // application/json 타입 선언
-            },
-        })
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err))
+            .catch((error) => {
+                alert("error" + error);
+            });
     }
-    const content = <form className={"admin-form"} onSubmit={submitForm} encType="multipart/form-data">
-        <input type={"number"} placeholder={"조합 번호"} name={"ad_id"}/>
-        <input type={"text"} placeholder={"성명"} name={"ad_name"}/>
-        <input title={"password"} placeholder={"비밀번호"} name={"ad_pw"}/>
-        <input type={"number"} placeholder={"OTP 인증"} name={"ad_otp_code"}/>
-        <button type={"submit"} >아이디 생성</button>
-    </form>
-    return(
+
+    const submitForm = (type, admin) => {
+        setModalType(type);
+        setSelectedAdmin(admin);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setSelectedAdmin({});
+    };
+
+    const editAdmin = (
+        <EditAdmin admin={selectedAdmin} closeModal={closeModal} />
+    );
+
+    return (
         <>
             <h1>조합원 추가</h1>
             <div className="header_wrap">
                 <div className="_header">
-                    {/*<div className="notice_header_title"><h2>Notice</h2></div>*/}
                     <div className="_header_sub">
-                        {/*<button onClick={()=>goEditNotice("insert",0 )}>추가</button>*/}
-                        <Search option={"adminOption"}
-                                search={searchAdminList}
-                                setSearchText={setSearchText}
-                                setSearchType={setSearchType}/>
+                        <Search
+                            option={"adminOption"}
+                            search={searchAdminList}
+                            setSearchText={setSearchText}
+                            setSearchType={setSearchType}
+                        />
                     </div>
                 </div>
             </div>
-            {/*body*/}
             <div className={"body_warp"}>
                 <table className="admin_table">
                     <colgroup>
-                        <col style={{width: '5%'}}/>
-                        <col style={{width: '30%'}}/>
-                        <col style={{width: '30%'}}/>
-                        <col style={{width: '7%'}}/>
+                        <col style={{ width: "5%" }} />
+                        <col style={{ width: "30%" }} />
+                        <col style={{ width: "30%" }} />
+                        <col style={{ width: "7%" }} />
                     </colgroup>
                     <thead className={"admin_table_head"}>
                     <tr>
@@ -96,15 +89,14 @@ function AddAdmin(props){
                     </tr>
                     </thead>
                     <tbody className={"admin_table_body"}>
-                    {
-                        Admin.map((element) => (
-                            <AdminList
-                                key={element.ad_idx}
-                                admin={element}
-                                searchText={searchText}
-                                searchType={searchType}
-                            />
-                        ))}
+                    {Admin.map((element) => (
+                        <AdminList
+                            key={element.ad_idx}
+                            admin={element}
+                            searchText={searchText}
+                            searchType={searchType}
+                        />
+                    ))}
                     </tbody>
                 </table>
             </div>
