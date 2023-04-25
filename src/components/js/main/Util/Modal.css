@@ -8,19 +8,22 @@
     z-index: 98;
     background-color: rgba(0, 0, 0, 0.6);
 }
+
 .modal {
     display: none;
     position: fixed;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     z-index: 99;
 }
+
 .modal button {
     outline: none;
     cursor: pointer;
     border: 0;
 }
+
 .modal > section {
     width: 60vw;
     height: 60vh;
@@ -32,17 +35,26 @@
     overflow: hidden;
     z-index: 100;
 }
+
 .modal > section > header {
     position: relative;
-    padding: 0.5rem 2rem 0.5rem 2rem;
-    background-color: #f1f1f1;
+    padding: 0.5rem 0;
+    background-color: #d9d9d9;
     font-weight: 700;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    font-size: 26px;
+    height: 5vh;
+    max-height: 65px;
 }
 
-.modal > section > main {
+.modal h2{
+    text-decoration: none;
+}
+
+
+.modal > section > .main {
     padding: 0.5vh 0.5vw 0.5vh 0.5vw;
     border-bottom: 1px solid #dee2e6;
     border-top: 1px solid #dee2e6;
@@ -51,41 +63,51 @@
     height: 50vh;
     padding-bottom: 20%;
 }
+
 .modal_footer {
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 0;
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
     position: fixed;
-    left: 0px;
-    bottom: 0vh;
+    left: 0;
+    bottom: 0;
     height: 1vh;
-    width: 100%;
-    background-color: #f1f1f1;
+    background-color: #d9d9d9;
     color: white;
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
     border-top: 1px solid #dee2e6;
+    width: 100%;
+    min-height: 2rem;
 }
 
 .modal_footer button {
+    position: relative;
     padding: 0.5rem 1.0rem;
+    height: 100%;
+    width: 80px;
     color: #fff;
     background-color: #6c757d;
     border-radius: 5px;
     font-size: 13px;
+    right: 2vw;
+    margin: 0 1vw;
 }
+
 .modal.openModal {
     display: flex;
     align-items: center;
     /* 팝업이 열릴때 스르륵 열리는 효과 */
     animation: modal-bg-show 0.3s;
 }
+
 .Layer.openLayer {
     display: flex;
     align-items: center;
     /* 팝업이 열릴때 스르륵 열리는 효과 */
     animation: modal-bg-show 0.3s;
 }
+
 @keyframes modal-show {
     from {
         opacity: 0;
@@ -96,6 +118,7 @@
         margin-top: 0;
     }
 }
+
 @keyframes modal-bg-show {
     from {
         opacity: 0;
