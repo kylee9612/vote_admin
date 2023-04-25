@@ -38,10 +38,8 @@
     line-height: 5rem;
     cursor: pointer;
 }
-
-
-
 .editNotice_head_wrap{
+    height: 5vh;
     display: flex;
     flex-direction: row;
     align-content: center;

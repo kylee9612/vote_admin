@@ -20,8 +20,7 @@ const AddNotice = (props) => {
    const [curPage, setCurPage] =useState(1);
    const [lastPage, setLastPage] = useState(1);
    /**pageNation**/
-
-   let index = 0;
+   function searchNoticeList(){}
 
    useEffect(() => {
       let noticeList = [];
@@ -45,9 +44,6 @@ const AddNotice = (props) => {
       })
    },[searchText, searchType , curPage]);
 
-   function searchNoticeList(){
-
-   }
 
    function goEditNotice(type, id){
       console.log(location.pathname)

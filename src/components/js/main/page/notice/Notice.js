@@ -8,15 +8,7 @@ function Notice({notice, searchText, searchType , goEditNotice}) {
     let returnMap = "";
     /**open Detail**/
     const [modalVisibleId, setModalVisibleId] = useState("")
-    // const [id , setId] = useState();
     const onModalHandler = id => {
-        // setId(e);
-        // console.log(id)
-        // const url = "/api/notice/increaseViews"
-        // const params = {
-        //     "nt_no" : id
-        // }
-        // axios.post(url,params);
         setModalVisibleId(id)
     }
     const onCloseHandler = () => {

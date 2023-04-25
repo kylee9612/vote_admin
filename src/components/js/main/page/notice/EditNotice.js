@@ -131,7 +131,8 @@ const EditNotice = (props) => {
     }
 
 
-    return (<form id={"noti_form"} onSubmit={editNotice} encType="multipart/form-data">
+    return (
+        <form id={"noti_form"} onSubmit={editNotice} encType="multipart/form-data">
         <div className={"editNotice_wrap"}>
             <div className={"editNotice_head_wrap"}>
                 <input type={"hidden"} id={"nt_no"} name={"nt_no"} value={nt_no}/>
@@ -142,9 +143,9 @@ const EditNotice = (props) => {
             </div>
             <div className={"editNotice_contents_wrap"}>
                 <label></label>
-                <ReactQuill value={text} onChange={setText}></ReactQuill>
+                <ReactQuill value={text} onChange={setText} style={{ height: '50vh' }}></ReactQuill>
             </div>
-            <div className={"form-image"}>
+            <div className={"form-image"} style={{marginTop : '5%'}}>
                 {showImages.map((image, id) => (
                     <div className={"image-container"} key={id}>
                         <img src={image} alt={`${image}-${id}`} width={"100px"} height={"100px"}/>
@@ -164,7 +165,8 @@ const EditNotice = (props) => {
             <button type="submit">등록하기</button>
             <button type="button" onClick={() => history(-1)}>뒤로가기</button>
         </div>
-    </form>)
+    </form>
+    )
 }
 
 export default EditNotice
