@@ -16,7 +16,7 @@
     border: 1px solid grey;
     margin: auto;
 }
-.admin_table_head{
+.admin_table_head , .admin_table_tr{
     border-collapse: collapse;
     text-align: center;
     border: 1px solid grey;
