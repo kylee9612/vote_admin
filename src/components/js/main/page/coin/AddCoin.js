@@ -11,7 +11,7 @@ function AddCoin() {
     const [showImages, setShowImages] = useState([]);
     const [fileList, setFileList] = useState([]);
     const [text, setText] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const modules = {
         toolbar: {
@@ -44,6 +44,9 @@ function AddCoin() {
             })
             .catch(() => {
                 sweetAlert("error",null)
+            })
+            .finally(()=>{
+                setLoading(false)
             })
     }, [])
 
@@ -108,9 +111,7 @@ function AddCoin() {
 
     return (
         <>
-            {
-                loading === true ? <Loading/> : ""
-            }
+            {loading === true ? <Loading/> : ""}
             <h1>코인 추가</h1>
             <form id={"coin-form"} className={"coin-form"} onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className={"form-top"}>
