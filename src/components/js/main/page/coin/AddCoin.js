@@ -1,15 +1,17 @@
 import "./AddCoin.css"
 import {useEffect, useState} from "react";
 import axios from "axios";
-import Swal from "sweetalert2";
 import Delete from "../box/Delete";
 import EditorComponent from "../box/EditorComponent";
+import Loading from "../../Util/Loading";
+import {sweetAlert} from "../../Util/Common";
 
-function AddCoin(prop) {
+function AddCoin() {
     const [round, setRound] = useState([])
     const [showImages, setShowImages] = useState([]);
     const [fileList, setFileList] = useState([]);
     const [text, setText] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const modules = {
         toolbar: {
@@ -40,11 +42,8 @@ function AddCoin(prop) {
                     return element
                 }))
             })
-            .catch(error => {
-                Swal.fire({
-                    showConfirmButton: "OK",
-                    html: "error"
-                })
+            .catch(() => {
+                sweetAlert("error",null)
             })
     }, [])
 
@@ -57,28 +56,22 @@ function AddCoin(prop) {
             formData.append("coin_pic_list", pic);
         })
         formData.append("coinInfo", text)
-
+        setLoading(true)
         axios.post("/api/admin/coins", formData)
             .then(response => {
                 let data = response.data;
-                Swal.fire({
-                    showConfirmButton: "OK",
-                    icon : "success",
-                    title: data.message
-                })
-                if (data.code == "0000") {
+                sweetAlert(response,null)
+                if (data.code === 0) {
                     event.target.reset();
                     setShowImages([])
                     setFileList([])
                 }
             })
-            .catch(error => {
-                Swal.fire({
-                    icon : "error",
-                    showConfirmButton: "OK",
-                    title : "ERROR OCCURRED"
-                })
-            })
+            .catch(() => {
+                sweetAlert("error",null)
+            }).finally(()=>{
+                setLoading(false)
+        })
     }
 
     function imagesPreview(event) {
@@ -115,6 +108,9 @@ function AddCoin(prop) {
 
     return (
         <>
+            {
+                loading === true ? <Loading/> : ""
+            }
             <h1>코인 추가</h1>
             <form id={"coin-form"} className={"coin-form"} onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className={"form-top"}>

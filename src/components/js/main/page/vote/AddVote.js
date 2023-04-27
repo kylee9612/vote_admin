@@ -5,12 +5,20 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import Loading from "../../Util/Loading";
+import * as common from "../../Util/Common"
+import {sweetAlert} from "../../Util/Common";
 
-function AddVote() {
+function AddVote(prop) {
+    const [title, setTitle] = useState("");
     const [text, setText] = useState("");
-    const [round, setRound] = useState("");
+    const [round, setRound] = useState("1");
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+    const [disable, setDisable] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const location = prop.prop.location;
 
     const modules = {
         toolbar: {
@@ -37,40 +45,28 @@ function AddVote() {
         setText(value)
     }
 
+    const handleTitle = (value) => {
+        setTitle(value)
+    }
+
     useEffect(() => {
-        axios.get("/api/admin/vote/list/last")
-            .then((response) => {
+        let url = "/api/admin/round/list";
+        setLoading(true)
+        if (location.state !== null) {
+            url += "/" + location.state.num;
+            setDisable(true)
+        } else
+            url += "/last"
+        axios.get(url).then((response) => {
+            if (disable === false)
                 setRound(response.data.data + 1);
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: "error",
-                    showConfirmButton: "OK",
-                    title: "ERROR OCCURRED"
-                })
-            })
-    }, [])
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        formData.append("content", text);
-        formData.append("startDate", startDate);
-        formData.append("endDate", endDate);
-
-        axios.post("/api/admin/vote", formData, {
-            headers: {
-                "Content-Type": `application/json`, // application/json 타입 선언
-            },
-        }).then(response => {
-            if (response.data.code == "0000") {
-                Swal.fire({
-                    showConfirmButton: "OK",
-                    icon: "success",
-                    title: response.data.message
-                })
-                event.target.reset();
-                setText("");
+            else {
+                let roundObj = response.data.data;
+                setRound(roundObj.round);
+                setText(roundObj.content);
+                setTitle(roundObj.title);
+                setStartDate(new Date(roundObj.startDate));
+                setEndDate(new Date(roundObj.endDate));
             }
         }).catch(error => {
             Swal.fire({
@@ -78,36 +74,64 @@ function AddVote() {
                 showConfirmButton: "OK",
                 title: "ERROR OCCURRED"
             })
+        }).finally(() => {
+            setLoading(false)
+        })
+    }, [disable, location.state])
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        formData.append("content", text);
+        formData.append("startDate", common.parseDateFormat(startDate));
+        formData.append("endDate", common.parseDateFormat(endDate));
+        formData.append("round",round);
+
+        setLoading(true)
+        axios.post("/api/admin/vote", formData, {
+            headers: {
+                "Content-Type": `application/json`,
+            },
+        }).then(response => {
+            if (response.data.code === 0) {
+                sweetAlert(response,"/main/vote/lists")
+            }
+        }).catch(() => {
+            sweetAlert("error",null)
+        }).finally(() => {
+            setLoading(false)
         })
     }
 
     return (
         <>
+            {loading === true ? <Loading/> : ""}
             <h1>투표 추가</h1>
             <form className={"vote-form"} onSubmit={handleSubmit}>
                 <div className={"form-top"}>
                     <select className={"form-round form-select"} name={'round'} title={"회차"} disabled={true}>
-                        {
-                            <option key={round} value={round}>{round}회차</option>
-                        }
+                        <option key={round} value={round}>{round}회차</option>
                     </select>
-                    <input className={"form-input-text"} name={"title"} type={"text"} placeholder={"제목"}/>
+                    <input className={"form-input-text"} name={"title"} type={"text"} placeholder={"제목"} defaultValue={title}
+                           onChange={handleTitle}/>
                     <div className={"datepicker-div"}>
                         <DatePicker
                             placeholderText='투표 시작일'
-                            dateFormat='yyyy/MM/dd'
+                            dateFormat='yyyy-MM-dd'
                             autoComplete='off'
                             className={"form-input-date"}
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
+                            disabled={disable}
                         />
                         <DatePicker
                             placeholderText='투표 종료일'
-                            dateFormat='yyyy/MM/dd'
+                            dateFormat='yyyy-MM-dd'
                             autoComplete='off'
                             className={"form-input-date"}
                             selected={endDate}
                             onChange={(date) => setEndDate(date)}
+                            disabeld={disable}
                         />
                     </div>
                 </div>
