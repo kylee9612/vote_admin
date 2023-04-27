@@ -1,10 +1,20 @@
 import "./RoundInfo.css"
 import DatePicker from "react-datepicker";
 
-function RoundInfo({data, index,clickEvent}) {
+function RoundInfo({data, index, clickEvent}) {
+    const progress = () => {
+        const today = new Date();
+        if (today < new Date(data.startDate))
+            return "upcoming"
+        else if (today > new Date(data.endDate))
+            return "finished"
+        else
+            return "ongoing"
+    }
     return (
         <div className={"round-info"} onClick={clickEvent}>
             <div className={"round-info-inner"}>
+                <div className={"progress " + progress()}>{progress()}</div>
                 <h2>{index + 1}회차</h2>
                 <h3>{data.title}</h3>
                 <div className={"round-info-date"}>

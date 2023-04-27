@@ -1,7 +1,7 @@
 import './App.css';
 import Login from "./components/js/side/Login";
 import Main from "./components/js/side/Main"
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import Header from "./components/js/side/Header";
@@ -19,6 +19,8 @@ import RoundList from "./components/js/main/page/round/RoundList";
 function App() {
 
     const [isLogin, setLogin] = useState(false)
+
+    const nodeRef = useRef(null);
 
     useEffect(() => {
         let user = sessionStorage.getItem("userId")
@@ -45,7 +47,7 @@ function App() {
             <Header navigate={navigate} location={location}/>
             {location.pathname === "/" ? <></> : <Menu navigate={navigate}/>}
             <TransitionGroup className={"transition-group"}>
-                <CSSTransition key={location.pathname} timeout={500} classNames={"slide"}>
+                <CSSTransition nodeRef={nodeRef} key={location.pathname} timeout={500} classNames={"slide"}>
                     <Routes location={location}>
                         <Route path="/" element={<Login btnLogin={btnLogin}/>}></Route>
                         <Route path="/main" element={<Main prop={prop}/>}>

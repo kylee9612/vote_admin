@@ -23,7 +23,7 @@
     min-height: 100%;
     max-height: 100%;
     max-width: 100%;
-    background: rgba(224, 132, 132, 0.05);
+    background: rgba(255, 255, 255, 0.02);
     box-shadow: 0 0 10px rgba(0,0,0,0.25);
     backdrop-filter: blur(10px);
     border-radius: 8px;
@@ -46,4 +46,27 @@
     align-items: center;
     justify-content: space-evenly;
     margin-bottom: 3vh;
+}
+
+.progress{
+    position: absolute;
+    top : 25px;
+    left : 0;
+    z-index: 3;
+    rotate : 315deg;
+    font-weight: bold;
+    padding : 5px;
+    opacity: 0.8;
+}
+.upcoming.progress{
+    color: #0b8bde;
+    border : 1px solid #1b96e5;
+}
+.finished.progress{
+    color: black;
+    border : 1px solid black;
+}
+.ongoing.progress{
+    color: #56ff1a;
+    border : 1px solid #56ff1a;
 }

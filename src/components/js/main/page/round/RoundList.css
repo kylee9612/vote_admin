@@ -5,3 +5,17 @@
     height: 75%;
     padding : 5vh 1vw;
 }
+
+.roundList::-webkit-scrollbar{
+    height: 10px;
+}
+
+.roundList::-webkit-scrollbar-thumb{
+    background: rgb(203, 203, 203);
+    border-radius: 10px;
+}
+
+.roundList::-webkit-scrollbar-track{
+    background: rgba(129, 129, 129, 0.21);
+    border-radius: 10px;
+}
