@@ -11,24 +11,12 @@ function EditAdmin(props, ref) {
         ad_name: "",
         ad_level: "",
     }
-    const currentAdmin = (admin !== null ? admin : defaultAdmin)
-    // const handleSubmit = (e) => {
-    //     alert(handleSubmit);
-    //     e.preventDefault();
-    //     const url = "/api/admin/admin";
-    //     const formData = new FormData(e.currentTarget);
-    //     if(mode == "create"){
-    //         axios.post(url,formData)
-    //             .then((e)=>{alert("관리자 생성이 완료되었습니다.")})
-    //             .catch((e)=>alert("관리자 생성이 실패했습니다. \n 관리자에게 문의 하세요. \nError code: "))
-    //     }else{
-    //         axios.put(url,formData)
-    //             .then((e)=>{alert("관리자 수정이 완료되었습니다.")})
-    //             .catch((e)=>alert("관리자 수정이 실패했습니다. \n 관리자에게 문의 하세요. \nError code: "))
-    //     }
-    // }
+    const [currentAdmin, setCurrentAdmin] = useState(admin || defaultAdmin);
 
-
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setCurrentAdmin((prevAdmin) => ({ ...prevAdmin, [name]: value }));
+    };
     return (
         <form className={"admin-form"} id={"admin-form"} onSubmit={handleSubmit}>
             <table>
@@ -36,19 +24,19 @@ function EditAdmin(props, ref) {
                 <input type={"hidden"} name={"ad_idx"} value={currentAdmin.ad_idx}/>
                 <tr>
                     <th>ID:</th>
-                    <td><input type="text" name="ad_id" value={currentAdmin.ad_id} /></td>
+                    <td><input type="text" name="ad_id" value={currentAdmin.ad_id} onChange={handleInputChange}/></td>
                 </tr>
                 <tr>
                     <th>Password:</th>
-                    <td><input type="password" name="ad_pw" value={currentAdmin.ad_pw} /></td>
+                    <td><input type="password" name="ad_pw" value={currentAdmin.ad_pw} onChange={handleInputChange}/></td>
                 </tr>
                 <tr>
                     <th>Name:</th>
-                    <td><input type="text" name="ad_name" value={currentAdmin.ad_name}/></td>
+                    <td><input type="text" name="ad_name" value={currentAdmin.ad_name} onChange={handleInputChange}/></td>
                 </tr>
                 <tr>
                     <th>Level:</th>
-                    <td><input type="text" name="ad_level" value={currentAdmin.ad_level} /></td>
+                    <td><input type="text" name="ad_level" value={currentAdmin.ad_level} onChange={handleInputChange}/></td>
                 </tr>
                 </tbody>
             </table>

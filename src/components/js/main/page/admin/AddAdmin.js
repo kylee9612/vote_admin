@@ -44,7 +44,7 @@ function AddAdmin(prop) {
                 alert("error" + error);
             });
     }
-    function handleSubmit(){
+    function handleSubmit(mode){
         const form = document.getElementById('admin-form');
         const url = "/api/admin/admin";
         const formData = new FormData(form);
@@ -53,10 +53,18 @@ function AddAdmin(prop) {
             axios.post(url,formData)
                 .then((e)=>{alert("관리자 생성이 완료되었습니다.")})
                 .catch((e)=>alert("관리자 생성이 실패했습니다. \n 관리자에게 문의 하세요. \nError code: "))
+                .finally(()=>{
+                    setModalShow(false);
+                    searchAdminList();
+                })
         }else{
             axios.put(url,formData)
                 .then((e)=>{alert("관리자 수정이 완료되었습니다.")})
                 .catch((e)=>alert("관리자 수정이 실패했습니다. \n 관리자에게 문의 하세요. \nError code: "))
+                .finally(()=>{
+                    setModalShow(false);
+                    searchAdminList();
+                })
         }
     }
 
@@ -71,14 +79,14 @@ function AddAdmin(prop) {
             contentObject = <EditAdmin mode={mode} admin={data}  />;
             buttonList = [{
                     buttonLabel : "Edit",
-                    buttonFunc: () => handleSubmit()
+                    buttonFunc: () => handleSubmit(mode)
                 }]
-        }else if(mode == "insert"){
+        }else if(mode == "create"){
             header = `<h3>`+"관리자 생성"+`</h3>`;
             contentObject = <EditAdmin mode={mode} admin={null}  />;
             buttonList = [{
                 buttonLabel : "Create",
-                buttonFunc: () => handleSubmit()
+                buttonFunc: () => handleSubmit(mode)
             }]
         }
 
@@ -105,7 +113,7 @@ function AddAdmin(prop) {
                             setSearchText={setSearchText}
                             setSearchType={setSearchType}
                         />
-                        <button onClick={()=>modalHandler("insert")}>추가</button>
+                        <button onClick={()=>modalHandler("create")}>추가</button>
                     </div>
                 </div>
             </div>
